@@ -24,4 +24,16 @@ class Solution:
                     current_streak += 1
                 longest_streak = max(longest_streak, current_streak)
         return longest_streak
-    
+
+    # 560. 和为 K 的子数组
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        hash_map = {0: 1}
+        count = 0
+        sum = 0
+        for num in nums:
+            sum += num
+            if sum - k in hash_map:
+                count += hash_map[sum - k]
+            hash_map[sum] = hash_map.get(sum, 0) + 1
+        return count
+
